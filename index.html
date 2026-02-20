@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Sanskriti</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Caveat:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-steps" id="navSteps"></div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Section 1: Intro with Handwriting Animation -->
+        <section class="section" id="section-1" data-section="1">
+            <div class="content">
+                <div class="handwritten-text">
+                    <h1 id="handwritingText" class="handwriting"></h1>
+                </div>
+                <div class="animated-divider"></div>
+                <!-- <p class="fade-in-text">Tap anywhere to begin</p> -->
+                <div class="cta-button" onclick="nextSection()">Start Our Story ></div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+        <!-- Section 2: Animated Name -->
+        <section class="section" id="section-2" data-section="2">
+            <div class="content">
+                <div class="name-animation-container">
+                    <h1 id="animatedName" class="animated-name-text"></h1>
+                </div>
+                <div class="name-description">
+                    <p id="nameDescription" class="fade-text"></p>
+                </div>
+                <div class="cta-button" onclick="nextSection()">Next</div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+        <!-- Section 3: Password Lock with Full Screen Image -->
+        <section class="section" id="section-3" data-section="3">
+            <div class="content password-section">
+                <h2>🔐 Only You Know This</h2>
+                <p class="password-heading">Only you know this answer.</p>
+                <p class="password-hint">Hint: Hear the Background Music</p>
+                <input 
+                    type="text" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="Type the answer..."
+                    onkeypress="handlePasswordKey(event)"
+                />
+                <button class="cta-button" onclick="checkPassword()">Unlock</button>
+                <p class="error-message" id="errorMessage"></p>
+                <p class="unlock-message" id="unlockMessage" style="display: none;">Of course Baby, it had to be you.</p>
+            </div>
+            <div class="background-particles"></div>
+            
+            <!-- Full Screen Image Modal -->
+            <div class="fullscreen-modal" id="fullscreenModal" style="display: none;">
+                <div class="modal-content">
+                    <img id="unlockImage" src="" alt="Special moment" class="fullscreen-image">
+                    <button class="modal-next-btn" onclick="closeModalAndNext()">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Essay with Voice Button -->
+        <section class="section" id="section-4" data-section="4">
+            <div class="content">
+                <h2>A Message From My Heart</h2>
+                <div class="essay-container">
+                    <p id="essayText" class="essay-text"></p>
+                </div>
+                <div class="voice-button-container">
+                    <button class="voice-button" onclick="toggleVoiceAudio(event)">
+                        <span class="voice-icon">🎤</span>
+                        <span id="voiceButtonText">Listen in my voice</span>
+                    </button>
+                </div>
+                <div class="cta-button" onclick="nextSection()">Next</div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+        <!-- Section 5: Photo Cards -->
+        <section class="section" id="section-5" data-section="5">
+            <div class="content">
+                <h2>Our Moments Together</h2>
+                <p id="section5Text" class="section-text"></p>
+                <div class="cards-container" id="cardsContainer"></div>
+                <div class="cta-button" onclick="nextSection()">Next</div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+        <!-- Section 6: Honesty Essay -->
+        <section class="section" id="section-6" data-section="6">
+            <div class="content">
+                <h2>With Full Honesty</h2>
+                <div class="honesty-essay-container">
+                    <div id="honestyText" class="honesty-text"></div>
+                </div>
+                <div class="cta-button" onclick="nextSection()">Next</div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+        <!-- Section 7: Build-up -->
+        <section class="section" id="section-7" data-section="7">
+            <div class="content">
+                <h2 id="section7Title"></h2>
+                <p id="section7Text" class="section-text"></p>
+                <div class="cta-button" onclick="nextSection()">I'm Ready</div>
+            </div>
+            <div class="background-particles"></div>
+        </section>
+
+    <!-- Section 8: Proposal with Single Card -->
+    <section class="section" id="section-8" data-section="8">
+        <div class="emoji-background" id="emojiBackground"></div>
+        <div class="proposal-overlay"></div>
+        <div class="proposal-container">
+            <div class="proposal-single-card" id="proposalSingleCard" onclick="revealNextParagraph(event)">
+                <div class="proposal-card-content">
+                    <div class="click-hint" id="clickHint">💝 Click anywhere to continue</div>
+                    <div class="paragraphs-container" id="paragraphsContainer"></div>
+                </div>
+            </div>
+            <div class="proposal-question" id="proposalQuestion" style="display: none;">
+                <div class="question-wrapper">
+                    <h2>Sanskriti,<br>Will You Start A journey<br>That Will Lead Us to Infinity.</h2>
+                    <p class="will-you-be">Will you be mine Baby? ❤️</p>
+                    <div class="button-group">
+                        <button class="yes-btn" onclick="handleYes(event)">Yes ❤️</button>
+                        <button class="no-btn" onclick="handleNo(event)">No 🙈</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="background-particles"></div>
+    </section>
+
+        <!-- Celebration Screen with Video & Photo -->
+        <section class="section" id="celebration-screen" style="display: none;">
+            <div class="celebration-background"></div>
+            
+            <!-- Video Container -->
+            <div class="video-container" id="videoContainer" style="display: none;">
+                <div class="hearts-animation" id="heartsAnimation"></div>
+                <video id="celebrationVideo" class="celebration-video" muted>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Photo Container -->
+            <div class="photo-container" id="photoContainer" style="display: none;">
+                <img id="finalPhoto" src="" alt="Our moment" class="final-photo">
+            </div>
+            
+            <!-- Confetti -->
+            <div id="confetti" class="confetti"></div>
+        </section>
+
+        <!-- Completion Screen -->
+        <section class="section" id="completion-screen" style="display: none;">
+            <div class="content celebration">
+                <h1>I knew it.</h1>
+                <p>And I'm really glad it's you.</p>
+                <p>This is just the beginning of our forever story. ❤️</p>
+                <button class="cta-button" onclick="revisitProposal()">Revisit the Proposal</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgMusic" loop style="display: none;" ></audio>
+    <audio id="voiceAudio" style="display: none;"></audio>
+    <audio id="unlockMusic" style="display: none;"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
